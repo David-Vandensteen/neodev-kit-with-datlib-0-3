@@ -1,1 +1,7 @@
 .DS_Store
+/tmp
+/m68k/lib/libc.a
+/m68k/lib/libcpp.a
+/m68k/lib/libmath.a
+/m68k/lib/libprocess.a
+/m68k/lib/libvideo.a
