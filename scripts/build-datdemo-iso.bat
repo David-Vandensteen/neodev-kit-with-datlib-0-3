@@ -24,9 +24,9 @@ powershell -Command "Expand-Archive -Path '%SPOOL%\cd_template.zip' -Destination
 call ..\setmvs.bat
 pushd %SRC%
 @echo on
-make
-@REM BuildChar chardata.xml
-@REM BuildChar fixData.xml
+make -f Makefile_CD
+BuildChar chardata.xml
+BuildChar fixData.xml
 cd out
 CharSplit char.bin -cd DEMO
 @echo off
