@@ -4,10 +4,11 @@ setlocal
 set DAT_DEMO=%temp%\datdemo
 set SPOOL=%DAT_DEMO%\spool
 set CD=%SPOOL%\cd
-set BIN=..\m68k\bin
+set BIN=%DAT_DEMO%\bin
 set SRC=..\src\samples\DATdemo
 
 if not exist %DAT_DEMO% md %DAT_DEMO%
+if not exist %BIN% md %BIN%
 if not exist %SPOOL% md %SPOOL%
 if not exist %CD% md %CD%
 
@@ -31,8 +32,8 @@ CharSplit char.bin -cd DEMO
 @echo off
 popd
 
-if not exist %SRC%\dev_p1.rom (
-  echo error %SRC%\dev_p1.rom not found
+if not exist %SRC%\test.prg (
+  echo error %SRC%\test.prg not found
   goto end
 )
 
@@ -52,10 +53,16 @@ if not exist %SRC%\out\fix.bin (
 )
 
 @echo on
-copy /y %SRC%\dev_p1.rom %CD%\cd_template\DEMO.PRG
+@REM copy /y %SRC%\dev_p1.rom %CD%\cd_template\DEMO.PRG
 @REM copy /y %SRC%\out\char.bin %CD%\cd_template\DEMO.SPR
+copy /y %SRC%\test.prg %CD%\cd_template\DEMO.PRG
 copy /y %SRC%\out\DEMO.SPR %CD%\cd_template\DEMO.SPR
 copy /y %SRC%\out\fix.bin %CD%\cd_template\DEMO.FIX
+
+@echo off
+set PATH=%BIN%
+
+@echo on
 mkisofs.exe -o %SPOOL%\demo.iso -pad %CD%\cd_template
 @echo off
 
